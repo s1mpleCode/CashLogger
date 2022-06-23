@@ -52,7 +52,7 @@ class Transaction(db.Model):
     date = db.Column(db.String(250), nullable=False)
 
 
-# db.create_all()
+db.create_all()
 
 #
 # def admin_only(f):
