@@ -13,12 +13,13 @@ from forms import LoginForm, RegisterForm, AddTransactionForm
 
 
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SECRET_KEY'] = 'my_secret_key'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# app.config['SECRET_KEY'] = 'my_secret_key'
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI",  "sqlite:///cashlogger.db")
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI",  "sqlite:///cashlogger.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()
