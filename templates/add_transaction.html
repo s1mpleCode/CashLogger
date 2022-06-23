@@ -1,0 +1,62 @@
+{% include "header.html" %}
+
+ <header class="masthead bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Fill out form</h1>
+            <span class="subheading">Easy step to manage your money</span>
+          </div>
+        </div>
+      </div>
+        <div class="signup-form">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+           <div>
+              {{ form.name(placeholder="Transaction name") }}
+              {% for error in form.name.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+            <div>
+              {{ form.sum(placeholder="Sum") }}
+              {% for error in form.sum.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+            <div>
+              {{ form.type(placeholder="Type") }}
+              {% for error in form.type.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+            <div>
+              {{ form.description(placeholder="Description") }}
+              {% for error in form.description.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+           <div>
+              {{ form.date(placeholder="Date") }}
+              {% for error in form.date.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+           <div>{{ form.submit() }}
+           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    </div>
+  </header>
+
+{% include "footer.html" %}

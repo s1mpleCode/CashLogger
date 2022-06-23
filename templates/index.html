@@ -1,0 +1,49 @@
+{% include "header.html" %}
+  <section class="title">
+    <div class="bg">
+
+      <div class="container-fluid title">
+        <!-- Title -->
+        {% if not current_user.is_authenticated: %}
+          <h1>Track your transactions in s1mple Web App. Do you already have an account? Then just log in.</h1>
+          <button type="button" onclick="window.location.href='{{ url_for('signup') }}';" class="btn btn-outline-light btn-lg download-button"><i class="bi bi-person-plus"></i>Sign Up</button>
+          <button type="button" onclick="window.location.href='{{ url_for('login') }}';" class="btn btn-outline-light btn-lg download-button"><i class="bi bi-person-check"></i>Log In</button>
+        {% else: %}
+          <h1>Welcome, {{ current_user.name }}! Check out the instructions below (in the next update) or get started on the tab 'Add transaction'</h1>
+        {% endif %}
+      </div>
+
+    </div>
+  </section>
+  <section class="features">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="feature-box col-lg-3">
+          <i class="fa-solid fa-handshake-simple fa-2xl"></i>
+          <h3>Easy to use</h3>
+          <p>Nothing complicated. Just register and use.</p>
+        </div>
+        <div class="feature-box col-lg-3">
+          <i class="fa-solid fa-user-shield fa-2xl"></i>
+          <h3>Safety</h3>
+          <p>Your data is securely protected from external interference.</p>
+        </div>
+        <div class="feature-box col-lg-3">
+          <i class="fa-solid fa-store-slash fa-2xl"></i>
+          <h3>Free</h3>
+          <p>All features are free. You came to track your money, not spend it ;)</p>
+        </div>
+        <div class="feature-box col-lg-3">
+          <i class="fa-solid fa-headset fa-2xl"></i>
+          <h3>Support</h3>
+          <p>You can always get live chat support 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+
+  </section>
+
+  {% include "footer.html" %}

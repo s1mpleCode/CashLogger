@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/dcc2ebe149.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/css/styles.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet/css/loading-bar.css') }}" />
+  <script type="text/javascript" src="{{ url_for('static', filename='stylesheet/js/loading-bar.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,600;0,700;1,100&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  <section class="header">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark stroke">
+
+        <a class="navbar-brand text-white" href="{{ url_for('home') }}"><i class="fa-solid fa-hand-holding-dollar"></i>CashLogger</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="{{ url_for('home') }}" class="nav-link text-white">
+                <i class="bi bi-house fa-2xl"></i>
+                <br>
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url_for('add_transaction') }}" class="nav-link text-white fa-bounce">
+                <i class="bi bi-cash-coin fa-2xl"></i>
+                <br>
+                Add transaction
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url_for('show_history') }}" class="nav-link text-white">
+                <i class="bi bi-clock-history fa-2xl"></i>
+                <br>
+                Transaction history
+              </a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--              <a href="#" class="nav-link text-white">-->
+<!--                <i class="bi bi-person-lines-fill fa-2xl"></i>-->
+<!--                <br>-->
+<!--                Contact-->
+<!--              </a>-->
+<!--            </li>-->
+            {% if current_user.is_authenticated: %}
+            <li class="nav-item">
+              <a href="{{ url_for('logout') }}" class="nav-link text-white">
+                <i class="bi bi-person-x fa-2xl"></i>
+                <br>
+                Log Out
+              </a>
+            </li>
+            {% else: %}
+            <li class="nav-item">
+              <a href="{{ url_for('login') }}" class="nav-link text-white">
+                <i class="bi bi-person-check fa-2xl"></i>
+                <br>
+                Log In
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url_for('signup') }}" class="nav-link text-white fa-beat-fade">
+                <i class="bi bi-person-plus fa-2xl"></i>
+                <br>
+                Sign Up
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+    </nav>
+    </div>
+  </section>

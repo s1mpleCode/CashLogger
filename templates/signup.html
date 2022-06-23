@@ -1,0 +1,50 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Register</h1>
+            <span class="subheading">Start track your transactions!</span>
+          </div>
+        </div>
+      </div>
+        <div class="signup-form">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+           <div>
+              {{ form.name(placeholder="Name") }}
+              {% for error in form.name.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+           <div>
+              {{ form.email(placeholder="Email") }}
+              {% for error in form.email.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+           <div>
+              {{ form.password(placeholder="Password") }}
+              {% for error in form.password.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+           </div>
+            <br>
+           <div>{{ form.submit() }}
+           </div>
+        </form>
+        <h3><a class="login-link" href="{{ url_for('login') }}">Already have an account? Just login</a></h3>
+      </div>
+    </div>
+  </div>
+    </div>
+  </header>
+{% include "footer.html" %}

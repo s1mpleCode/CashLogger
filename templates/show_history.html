@@ -1,0 +1,85 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Transaction history</h1>
+          </div>
+        </div>
+      </div>
+        <table class="table table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Sum</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+     <a href="{{ url_for('show_history') }}">
+    {% if transaction.sum > 0: %}
+    <tr class="table-success">
+    {% else: %}
+    <tr class="table-danger">
+    {% endif %}
+      <td>{{transaction.name}}</td>
+      <td>{{transaction.sum}}</td>
+      <td>{{transaction.description}}</td>
+      <td>{{transaction.date}}</td>
+    </tr>
+     </a>
+    {% endfor %}
+  </tbody>
+</table>
+
+      <canvas id="bar-chart" ></canvas>
+
+<script>
+
+var income = 0;
+var loss = 0;
+{% for value in transactions: %}
+  {% if value.sum > 0: %}
+    income += {{value.sum}};
+  {% else: %}
+    loss += {{value.sum}};
+  {% endif %}
+{% endfor %}
+
+new Chart(document.getElementById("bar-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ['Income', 'Loss'],
+      datasets: [
+        {
+          backgroundColor: ['rgb(0, 204, 0)', 'rgb(255, 50, 50)',],
+          data: [income, loss],
+        }
+      ]
+    },
+options: {
+    legend: { display: false },
+    responsive: true,
+    aspectRatio:2,
+    scales: {
+        yAxes: [{
+            display: true,
+            ticks: {
+                min:0,
+                max:100
+            }
+        }]
+    }
+},
+});
+</script>
+
+    </div>
+  </header>
+{% include "footer.html" %}
