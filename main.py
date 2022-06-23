@@ -84,7 +84,6 @@ def signup():
             method='pbkdf2:sha256',
             salt_length=8
         )
-        print(form.email.data)
         new_user = User(
             email=form.email.data,
             name=form.name.data,
@@ -93,7 +92,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        return render_template("add_transaction.html", current_user=current_user)
+        return redirect(url_for('home'))
 
     return render_template("signup.html", form=form)
 
@@ -130,8 +129,6 @@ def show_history():
     if current_user.is_authenticated:
         chart_data = db.session.query(func.sum(Transaction.sum).label('total'), Transaction.date).filter(Transaction.client_id == current_user.id).group_by(Transaction.date).all()
         transactions = Transaction.query.filter(Transaction.client_id == current_user.id).order_by(Transaction.date.desc()).all()
-        print(current_user.id)
-        print(transactions)
         return render_template("show_history.html", transactions=transactions, current_user=current_user, chart_data=chart_data)
     else:
         return redirect(url_for('login'))
@@ -164,7 +161,6 @@ def add_transaction():
         form = AddTransactionForm()
         if form.validate_on_submit():
             end_sum = form.sum.data
-            print(bool(int(form.type.data)))
             if not bool(int(form.type.data)):
                 end_sum = form.sum.data * -1
             new_transaction = Transaction(
@@ -217,5 +213,5 @@ def add_transaction():
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port=5000)
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
+    # app.run(debug=True)
